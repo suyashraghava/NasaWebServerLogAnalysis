@@ -1,0 +1,27 @@
+hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
+-input /data/assignments/ex2/task3/stackLarge.txt  \
+-output assignment2/task42/task42LargeOut \
+-mapper ./Task42Mapper1.py \
+-file ./Task42Mapper1.py \
+-reducer ./Task42Reducer1.py \
+-file ./Task42Reducer1.py \
+
+
+
+
+hdfs dfs -getmerge assignment2/task42/task42LargeOut  ~/task42LargeOutputAfterMerge
+hdfs dfs -put ./task42LargeOutputAfterMerge  assignment2/task42
+
+
+
+
+hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
+-D mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+-D  mapred.text.key.comparator.options=-nr \
+-D mapred.reduce.tasks=1 \
+-input assignment2/task42//task42LargeOutputAfterMerge \
+-output assignment2/task42/task42LargeResultAfterMerge \
+-mapper ./Task42Mapper2.py \
+-file ./Task42Mapper2.py \
+-reducer ./Task42Reducer2.py \
+-file ./Task42Reducer2.py \

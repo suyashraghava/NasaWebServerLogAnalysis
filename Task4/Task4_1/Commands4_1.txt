@@ -1,0 +1,10 @@
+hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
+-D mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator\
+-D mapred.text.key.comparator.options=-nr \
+-D mapred.reduce.tasks=1 \
+-input /data/assignments/ex2/task3/stackLarge.txt   \
+-output assignment2/task41/task41Out \
+-mapper ./mapper.py \
+-file ./mapper.py \
+-reducer ./reducer.py \
+-file ./reducer.py
