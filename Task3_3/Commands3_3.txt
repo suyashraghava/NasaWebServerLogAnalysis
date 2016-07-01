@@ -1,0 +1,7 @@
+hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
+-input /data/assignments/ex2/task2/logsLarge.txt \
+-output assignment2/task33/task33LargeOut \
+-mapper ./Task33Mapper.py \
+-file ./Task33Mapper.py \
+-reducer ./Task33Reducer.py \
+-file ./Task33Reducer.py \

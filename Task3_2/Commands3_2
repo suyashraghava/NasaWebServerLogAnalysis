@@ -1,0 +1,23 @@
+COMMANDS:
+
+hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
+ -input /data/assignments/ex2/task2/logsLarge.txt \
+ -output assignment2/task32/OutputLarge \
+ -mapper ./Task32Mapper1.py \
+ -file ./Task32Mapper1.py \
+ -reducer ./Task32Reducer1.py \
+ -file ./Task32Reducer1.py 
+hdfs dfs -getmerge assignment2/task32/OutputLarge ~/OutputLargeMerge
+hdfs dfs -put ./OutputLargeMerge assignment2/task32
+
+
+
+hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
+-D mapred.output.key.comparator.class=org.apache.hadoop.mapred.lib.KeyFieldBasedComparator \
+-D  mapred.text.key.comparator.options=-nr \
+ -D mapred.reduce.tasks=1 \
+ -input  assignment2/task32/OutputLargeMerge \
+ -output assignment2/task32/FinalOutputLarge \
+ -mapper ./Task32Mapper2.py \
+ -file ./Task32Mapper2.py \
+
