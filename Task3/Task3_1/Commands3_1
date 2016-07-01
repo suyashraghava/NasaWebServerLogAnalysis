@@ -1,9 +1,0 @@
-COMMANDS:
-hadoop jar /opt/hadoop/hadoop-2.7.1/share/hadoop/tools/lib/hadoop-streaming-2.7.1.jar \
- -D mapred.reduce.tasks=1 \
--input  /data/assignments/ex2/task2/logsLarge.txt  \
--output assignment2/task31/LargeOutput \
--mapper ./Task31Mapper.py \
--file ./Task31Mapper.py \
--reducer ./Task31Reducer.py \
--file ./Task31Reducer.py \
